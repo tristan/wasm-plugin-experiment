@@ -65,6 +65,7 @@ fn main() -> anyhow::Result<()> {
         .typed::<(), (), _>(&store)
         .unwrap();
     hello_world.call(&mut store, ())?;
+    hello_world.post_return(&mut store)?;
 
     println!("------ calling hello-int ------");
 
@@ -74,15 +75,17 @@ fn main() -> anyhow::Result<()> {
         .typed::<(u32,), (), _>(&store)
         .unwrap();
     hello_int.call(&mut store, (777,))?;
+    hello_int.post_return(&mut store)?;
 
     println!("------ calling hello-string ------");
 
     let hello_string = instance
         .get_func(&mut store, "hello-string")
         .unwrap()
-        .typed::<(String,), (), _>(&store) // also doesn't work with &str
+        .typed::<(&str,), (), _>(&store)
         .unwrap();
-    hello_string.call(&mut store, ("TEST2".to_string(),))?;
+    hello_string.call(&mut store, ("TEST2",))?;
+    hello_string.post_return(&mut store)?;
 
     println!("------ calling return-string ------");
 
@@ -92,6 +95,7 @@ fn main() -> anyhow::Result<()> {
         .typed::<(&str,), (String,), _>(&store)
         .unwrap();
     let (res,) = return_string.call(&mut store, ("TEST3",))?;
+    return_string.post_return(&mut store)?;
     println!("{res}");
 
     Ok(())
