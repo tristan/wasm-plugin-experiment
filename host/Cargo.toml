@@ -1,0 +1,14 @@
+[package]
+name = "host"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.68"
+wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", features = ["component-model"] }
+#wasmtime = { version = "4.0.0", features = ["component-model"] } # does not contain the component::generate! macro
+
+#wat = { git = "https://github.com/bytecodealliance/wasm-tools.git" }
+wat = "1.0.52"
+#wit-component = { git = "https://github.com/bytecodealliance/wasm-tools.git" }
+wit-component = "0.3.2"

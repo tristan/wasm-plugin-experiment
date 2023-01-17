@@ -1,0 +1,17 @@
+interface logging {
+  log: func(s: string)
+}
+interface test {
+  give-me-string: func() -> string
+}
+interface exports {
+  hello-world: func()
+  hello-int: func(i: u32)
+  hello-string: func(s: string)
+  return-string: func(s: string) -> string
+}
+world plugin {
+  import logging: logging
+  import test: test
+  default export exports
+}

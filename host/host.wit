@@ -1,0 +1,10 @@
+interface logging {
+  log: func(s: string)
+}
+interface test {
+  give-me-string: func() -> string
+}
+world host {
+  import logging: logging
+  import test: test
+}
